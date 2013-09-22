@@ -128,7 +128,7 @@ def do_turn
     @last_known_opponent_pos.x, @last_known_opponent_pos.y = attacker.x, attacker.y
     puts "One attacker at (#{attacker.x},#{attacker.y}), rotation, armor, ammo:  #{attacker.rotation} #{attacker.armor} #{attacker.ammo}" if DEBUG
     if can_fire_at?(attacker) && robot.ammo > 0
-      if can_flee(attacker) && rand(2) == 1
+      if can_flee(attacker) && (attacker.ammo >= robot.armor || robot.ammo < attacker.armor)
         puts "Can flee safely too. Fleeing" if DEBUG
         return flee_or_fight attackers
       else
